@@ -1,8 +1,0 @@
-2026-07-07T11:39:40.7560000Z Evaluating build.if
-2026-07-07T11:39:40.7560000Z Evaluating: success()
-2026-07-07T11:39:40.7560000Z Result: true
-2026-07-07T11:39:40.7800000Z Job is waiting for a hosted runner to come online.
-2026-07-07T11:39:40.7810000Z Job is about to start running on the hosted runner: GitHub Actions 1000000034
-2026-07-07T11:39:40.7590000Z Requested labels: ubuntu-latest
-2026-07-07T11:39:40.7590000Z Job defined at: MaximillionSnyder/Napp/.github/workflows/android-ci.yml@refs/heads/main
-2026-07-07T11:39:40.7590000Z Waiting for a runner to pick up this job...
