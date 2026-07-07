@@ -6,7 +6,6 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.napp.gastos.ui.screens.detail.ExpenseDetailScreen
 import com.napp.gastos.ui.screens.form.ExpenseFormScreen
 import com.napp.gastos.ui.screens.list.ExpenseListScreen
 
