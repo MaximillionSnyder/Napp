@@ -1,0 +1,22 @@
+﻿2026-07-07T11:40:52.1723452Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-07-07T11:40:52.1724805Z Post job cleanup.
+2026-07-07T11:40:52.4393367Z In post-action step
+2026-07-07T11:40:52.4410235Z ##[group]Stopping Gradle daemons
+2026-07-07T11:40:52.4411755Z Stopping Gradle daemons for /home/runner/.gradle/wrapper/dists/gradle-8.9-bin/90cnw93cvbtalezasaz0blq0a/gradle-8.9
+2026-07-07T11:40:52.4431884Z [command]/home/runner/.gradle/wrapper/dists/gradle-8.9-bin/90cnw93cvbtalezasaz0blq0a/gradle-8.9/bin/gradle --stop
+2026-07-07T11:40:53.2827017Z Stopping Daemon(s)
+2026-07-07T11:40:53.2846700Z 1 Daemon stopped
+2026-07-07T11:40:53.3141631Z ##[endgroup]
+2026-07-07T11:40:53.3187997Z Not performing cache-cleanup due to build failure
+2026-07-07T11:40:53.3203226Z ##[group]Caching Gradle state
+2026-07-07T11:40:55.2287549Z [command]/usr/bin/tar --posix -cf cache.tzst --exclude cache.tzst -P -C /home/runner/work/Napp/Napp --files-from manifest.txt --use-compress-program zstdmt
+2026-07-07T11:40:58.3179827Z Sent 0 of 201177829 (0.0%), 0.0 MBs/sec
+2026-07-07T11:40:59.3181504Z Sent 67108864 of 201177829 (33.4%), 32.0 MBs/sec
+2026-07-07T11:40:59.5244082Z Sent 201177829 of 201177829 (100.0%), 86.9 MBs/sec
+2026-07-07T11:40:59.7890432Z Saved cache entry with key gradle-transforms-v1-ec4f74e5f6673ab8d358fa75f79c1c52 from /home/runner/.gradle/caches/transforms-4/*/,/home/runner/.gradle/caches/*/transforms/*/ in 5317ms
+2026-07-07T11:41:00.3673094Z [command]/usr/bin/tar --posix -cf cache.tzst --exclude cache.tzst -P -C /home/runner/work/Napp/Napp --files-from manifest.txt --use-compress-program zstdmt
+2026-07-07T11:41:01.6169230Z Sent 3772820 of 3772820 (100.0%), 4.0 MBs/sec
+2026-07-07T11:41:01.8729760Z Saved cache entry with key gradle-home-v1|Linux-X64|build[5df42585ae8f8da228c604b8b4e8707c]-d59a4d0dfecd937f7568e3c483c74f7d60ba7da5 from /home/runner/.gradle/caches,/home/runner/.gradle/notifications,/home/runner/.gradle/.setup-gradle in 1517ms
+2026-07-07T11:41:01.8732888Z ##[endgroup]
+2026-07-07T11:41:01.8737896Z Generating Job Summary
+2026-07-07T11:41:01.8752206Z Completed post-action step
