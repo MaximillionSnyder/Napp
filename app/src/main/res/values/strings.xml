@@ -13,4 +13,6 @@
     <string name="no_expenses">No expenses yet</string>
     <string name="total_expenses">Total expenses</string>
     <string name="confirm_delete">Are you sure you want to delete this expense?</string>
+    <string name="tap_to_add">Tap + to add your first expense</string>
+    <string name="change_date">Change date</string>
 </resources>

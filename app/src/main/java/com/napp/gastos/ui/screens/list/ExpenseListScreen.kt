@@ -28,16 +28,17 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.napp.gastos.R
 import com.napp.gastos.data.local.Expense
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -49,13 +50,13 @@ fun ExpenseListScreen(
     onNavigateToForm: (Long?) -> Unit,
     viewModel: ExpenseListViewModel = hiltViewModel()
 ) {
-    val uiState by viewModel.uiState.collectAsState()
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     var expenseToDelete by remember { mutableStateOf<Expense?>(null) }
 
     Scaffold(
         topBar = {
             LargeTopAppBar(
-                title = { Text("Napp Gastos") },
+                title = { Text(stringResource(R.string.app_name)) },
                 colors = TopAppBarDefaults.largeTopAppBarColors(
                     containerColor = MaterialTheme.colorScheme.primaryContainer,
                     titleContentColor = MaterialTheme.colorScheme.onPrimaryContainer
@@ -67,7 +68,7 @@ fun ExpenseListScreen(
                 onClick = { onNavigateToForm(null) },
                 containerColor = MaterialTheme.colorScheme.primary
             ) {
-                Icon(Icons.Default.Add, contentDescription = "Add expense")
+                Icon(Icons.Default.Add, contentDescription = stringResource(R.string.add_expense))
             }
         }
     ) { padding ->
@@ -99,19 +100,19 @@ fun ExpenseListScreen(
     expenseToDelete?.let { expense ->
         AlertDialog(
             onDismissRequest = { expenseToDelete = null },
-            title = { Text("Delete expense") },
-            text = { Text("Are you sure you want to delete this expense?") },
+            title = { Text(stringResource(R.string.delete_expense)) },
+            text = { Text(stringResource(R.string.confirm_delete)) },
             confirmButton = {
                 TextButton(onClick = {
                     viewModel.deleteExpense(expense)
                     expenseToDelete = null
                 }) {
-                    Text("Delete", color = MaterialTheme.colorScheme.error)
+                    Text(stringResource(R.string.delete_expense), color = MaterialTheme.colorScheme.error)
                 }
             },
             dismissButton = {
                 TextButton(onClick = { expenseToDelete = null }) {
-                    Text("Cancel")
+                    Text(stringResource(R.string.cancel))
                 }
             }
         )
@@ -126,13 +127,13 @@ private fun EmptyState() {
         verticalArrangement = Arrangement.Center
     ) {
         Text(
-            text = "No expenses yet",
+            text = stringResource(R.string.no_expenses),
             style = MaterialTheme.typography.titleLarge,
             color = MaterialTheme.colorScheme.onSurfaceVariant
         )
         Spacer(modifier = Modifier.height(8.dp))
         Text(
-            text = "Tap + to add your first expense",
+            text = stringResource(R.string.tap_to_add),
             style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant
         )
@@ -157,7 +158,7 @@ private fun TotalAmountBar(total: Double) {
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = "Total expenses",
+                text = stringResource(R.string.total_expenses),
                 style = MaterialTheme.typography.titleMedium
             )
             Text(
@@ -217,7 +218,7 @@ private fun ExpenseItem(
                 IconButton(onClick = { onDelete(expense) }) {
                     Icon(
                         Icons.Default.Delete,
-                        contentDescription = "Delete",
+                        contentDescription = stringResource(R.string.delete_expense),
                         tint = MaterialTheme.colorScheme.error
                     )
                 }

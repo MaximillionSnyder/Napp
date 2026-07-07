@@ -28,15 +28,17 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.napp.gastos.R
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -48,7 +50,7 @@ fun ExpenseFormScreen(
     onNavigateBack: () -> Unit,
     viewModel: ExpenseFormViewModel = hiltViewModel()
 ) {
-    val uiState by viewModel.uiState.collectAsState()
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     var showDatePicker by remember { mutableStateOf(false) }
     val dateFormat = remember { SimpleDateFormat("MMM dd, yyyy", Locale.getDefault()) }
 
@@ -64,13 +66,18 @@ fun ExpenseFormScreen(
         topBar = {
             TopAppBar(
                 title = {
-                    Text(if (uiState.isEditing) "Edit expense" else "Add expense")
+                    Text(
+                        stringResource(
+                            if (uiState.isEditing) R.string.edit_expense
+                            else R.string.add_expense
+                        )
+                    )
                 },
                 navigationIcon = {
                     IconButton(onClick = onNavigateBack) {
                         Icon(
                             Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Back"
+                            contentDescription = stringResource(R.string.cancel)
                         )
                     }
                 },
@@ -91,7 +98,7 @@ fun ExpenseFormScreen(
             OutlinedTextField(
                 value = uiState.amount,
                 onValueChange = viewModel::updateAmount,
-                label = { Text("Amount") },
+                label = { Text(stringResource(R.string.amount)) },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
                 singleLine = true,
                 modifier = Modifier.fillMaxWidth(),
@@ -103,7 +110,7 @@ fun ExpenseFormScreen(
             OutlinedTextField(
                 value = uiState.category,
                 onValueChange = viewModel::updateCategory,
-                label = { Text("Category") },
+                label = { Text(stringResource(R.string.category)) },
                 singleLine = true,
                 modifier = Modifier.fillMaxWidth(),
                 isError = uiState.error?.contains("category") == true
@@ -114,7 +121,7 @@ fun ExpenseFormScreen(
             OutlinedTextField(
                 value = uiState.description,
                 onValueChange = viewModel::updateDescription,
-                label = { Text("Description") },
+                label = { Text(stringResource(R.string.description)) },
                 modifier = Modifier.fillMaxWidth(),
                 minLines = 3,
                 maxLines = 5
@@ -125,16 +132,14 @@ fun ExpenseFormScreen(
             OutlinedTextField(
                 value = dateFormat.format(Date(uiState.date)),
                 onValueChange = {},
-                label = { Text("Date") },
+                label = { Text(stringResource(R.string.date)) },
                 readOnly = true,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(0.dp),
+                modifier = Modifier.fillMaxWidth(),
                 enabled = false
             )
 
             TextButton(onClick = { showDatePicker = true }) {
-                Text("Change date")
+                Text(stringResource(R.string.change_date))
             }
 
             uiState.error?.let { error ->
@@ -159,7 +164,7 @@ fun ExpenseFormScreen(
                         strokeWidth = 2.dp
                     )
                 } else {
-                    Text("Save")
+                    Text(stringResource(R.string.save))
                 }
             }
         }
@@ -181,7 +186,7 @@ fun ExpenseFormScreen(
             },
             dismissButton = {
                 TextButton(onClick = { showDatePicker = false }) {
-                    Text("Cancel")
+                    Text(stringResource(R.string.cancel))
                 }
             }
         ) {
