@@ -6,6 +6,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.napp.gastos.ui.screens.detail.ExpenseDetailScreen
 import com.napp.gastos.ui.screens.form.ExpenseFormScreen
 import com.napp.gastos.ui.screens.list.ExpenseListScreen
 
@@ -17,8 +18,11 @@ fun NavGraph(navController: NavHostController) {
     ) {
         composable(NavRoutes.ExpenseList.route) {
             ExpenseListScreen(
-                onNavigateToForm = { expenseId ->
-                    navController.navigate(NavRoutes.ExpenseForm.createRoute(expenseId))
+                onNavigateToDetail = { expenseId ->
+                    navController.navigate(NavRoutes.ExpenseDetail.createRoute(expenseId))
+                },
+                onNavigateToForm = {
+                    navController.navigate(NavRoutes.ExpenseForm.createRoute())
                 }
             )
         }
@@ -36,6 +40,24 @@ fun NavGraph(navController: NavHostController) {
             ExpenseFormScreen(
                 expenseId = if (expenseId == -1L) null else expenseId,
                 onNavigateBack = { navController.popBackStack() }
+            )
+        }
+
+        composable(
+            route = NavRoutes.ExpenseDetail.route,
+            arguments = listOf(
+                navArgument("expenseId") {
+                    type = NavType.LongType
+                }
+            )
+        ) { backStackEntry ->
+            val expenseId = backStackEntry.arguments?.getLong("expenseId") ?: return@composable
+            ExpenseDetailScreen(
+                expenseId = expenseId,
+                onNavigateBack = { navController.popBackStack() },
+                onEdit = { id ->
+                    navController.navigate(NavRoutes.ExpenseForm.createRoute(id))
+                }
             )
         }
     }

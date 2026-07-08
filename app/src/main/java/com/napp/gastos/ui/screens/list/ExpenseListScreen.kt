@@ -47,7 +47,8 @@ import java.util.Locale
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ExpenseListScreen(
-    onNavigateToForm: (Long?) -> Unit,
+    onNavigateToDetail: (Long) -> Unit,
+    onNavigateToForm: () -> Unit,
     viewModel: ExpenseListViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -65,7 +66,7 @@ fun ExpenseListScreen(
         },
         floatingActionButton = {
             FloatingActionButton(
-                onClick = { onNavigateToForm(null) },
+                onClick = onNavigateToForm,
                 containerColor = MaterialTheme.colorScheme.primary
             ) {
                 Icon(Icons.Default.Add, contentDescription = stringResource(R.string.add_expense))
@@ -88,7 +89,7 @@ fun ExpenseListScreen(
                     items(uiState.expenses, key = { it.id }) { expense ->
                         ExpenseItem(
                             expense = expense,
-                            onClick = { onNavigateToForm(expense.id) },
+                            onClick = { onNavigateToDetail(expense.id) },
                             onDelete = { expenseToDelete = it }
                         )
                     }

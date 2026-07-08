@@ -8,4 +8,7 @@ sealed class NavRoutes(val route: String) {
             else "expense_form"
         }
     }
+    data object ExpenseDetail : NavRoutes("expense_detail/{expenseId}") {
+        fun createRoute(expenseId: Long): String = "expense_detail/$expenseId"
+    }
 }

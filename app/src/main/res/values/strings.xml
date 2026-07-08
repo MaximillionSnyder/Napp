@@ -15,4 +15,7 @@
     <string name="confirm_delete">Are you sure you want to delete this expense?</string>
     <string name="tap_to_add">Tap + to add your first expense</string>
     <string name="change_date">Change date</string>
+    <string name="expense_detail">Expense detail</string>
+    <string name="back">Back</string>
+    <string name="expense_not_found">Expense not found</string>
 </resources>
